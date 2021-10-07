@@ -1,0 +1,56 @@
+@import "../../styles/helpers";
+
+.slick-wrapper {
+  padding-top: 35px;
+  max-height: 530px;
+  &__content {
+    div {
+      border-radius: 20px;
+      min-height: 530px;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 0 0 40px 40px;
+      box-shadow: inset 0em -8em 200px black;
+
+      h2 {
+        font-size: 42px;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
+        line-height: 52px;
+        margin-top: 35px;
+        margin-bottom: 8px;
+      }
+      p {
+        display: block;
+        max-width: 50%;
+        font-size: 16px;
+      }
+    }
+  }
+  .slick-dots {
+    bottom: 5px;
+    li {
+      button {
+        &:before {
+          color: white;
+          opacity: 0.4;
+          font-size: 35px;
+        }
+      }
+    }
+    .slick-active {
+      button {
+        &:before {
+          color: $default-text;
+          opacity: 1;
+          font-size: 35px;
+        }
+      }
+    }
+  }
+}

@@ -5,9 +5,13 @@
   justify-content: center;
   outline: none;
   border: none;
-  padding: 12px 20px;
+  padding: 14px 20px;
   cursor: pointer;
   transition: filter 0.3s;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
   &.red {
     background-color: $red;
   }

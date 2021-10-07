@@ -59,16 +59,15 @@ module.exports = {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
-          "postcss-loader",
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpg|svg|gif|)$/,
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
         use: ["file-loader"],
+      },
+      {
+        test: /\.svg$/,
+        loader: "svg-inline-loader",
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
