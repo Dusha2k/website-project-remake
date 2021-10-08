@@ -1,16 +1,15 @@
 {
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "@typescript-eslint",
         "react-hooks"
     ],
     "extends": [
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "airbnb-typescript",
+        "react-app"
     ],
     "rules": {
         "react-hooks/rules-of-hooks": "error",
@@ -19,6 +18,9 @@
         "no-multi-spaces": "error",
         "space-in-parens": "error",
         "no-multiple-empty-lines": "error",
+        "@typescript-eslint/semi": [
+            "off"
+        ],
         "max-len": [
             "warn",
             {
@@ -27,13 +29,19 @@
                 "ignoreTemplateLiterals": true,
                 "ignoreComments": true
             }
-        ],
-        "@typescript-eslint/no-explicit-any": [
-            "error",
-            {
-                "ignoreRestArgs": true
-            }
         ]
+//        "@typescript-eslint/no-explicit-any": ["off"],
+//        "@typescript-eslint/ban-types": [
+//            "error",
+//            {
+//                "extendDefaults": true,
+//                "types": {
+//                    "{}": false,
+//                    "object": false,
+//                    "Object": false
+//                }
+//            }
+//        ]
     },
     "settings": {
         "react": {

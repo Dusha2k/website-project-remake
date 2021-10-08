@@ -1,4 +1,4 @@
 export interface IAnimeListProps {
-  getAnimeList: (param: string, page: string, limit: string) => void;
-  getCurrentAnime: (id: string) => void;
+  getAnimeList: (param: string, page?: string, limit?: string) => any
+  getCurrentAnime: (id: string) => any
 }

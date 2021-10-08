@@ -1,15 +1,15 @@
-import React from "react";
-import Arrow from "../../assets/icons/arrow_right.svg";
-import "./style.scss";
+import React from 'react'
+import Arrow from '../../assets/icons/arrow_right.svg'
+import './style.scss'
 
 const CardsHeader = ({
   text,
   withArrow,
   onClick,
 }: {
-  text: string;
-  withArrow?: boolean;
-  onClick?: () => void;
+  text: string
+  withArrow?: boolean
+  onClick?: () => void
 }): JSX.Element => {
   return (
     <div className="card-header">
@@ -21,11 +21,11 @@ const CardsHeader = ({
             <span dangerouslySetInnerHTML={{ __html: Arrow }} />
           </div>
         ) : (
-          ""
+          ''
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardsHeader;
+export default CardsHeader

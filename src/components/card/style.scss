@@ -1,20 +1,32 @@
-@import "../../styles/helpers";
+@import '../../styles/helpers';
 
 .card-wrapper {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  border-radius: 5px;
+  max-width: 230px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 25px;
+  cursor: pointer;
   .card-wrapper__img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
     font-size: 13px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    height: 100%;
     width: 100%;
     margin-bottom: 20px;
+    height: 325px;
+    .react-player {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
     .series {
       padding: 2px 12px;
       background-color: $red;
@@ -46,12 +58,37 @@
   }
 }
 
+.broad-wrapper {
+  margin-bottom: 0;
+  max-width: unset;
+  .card-wrapper__img {
+    height: 190px;
+    margin-bottom: 25px;
+    width: 100%;
+    box-shadow: inset 0em -1em 100px black;
+    .top-side__card {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      background-color: unset;
+      span {
+        display: block;
+      }
+    }
+    .card-wrapper__title {
+      background-color: unset;
+    }
+  }
+}
+
 .card-header {
   width: 100%;
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     h4 {
       font-weight: 600;
       line-height: 21px;
@@ -60,6 +97,7 @@
       position: relative;
       font-size: 24px;
       font-family: Oswald, sans-serif;
+
       &:after {
         position: absolute;
         left: 0;
@@ -67,9 +105,10 @@
         height: 32px;
         width: 4px;
         background: #e53637;
-        content: "";
+        content: '';
       }
     }
+
     .arrow-section {
       display: flex;
       align-items: center;
@@ -77,11 +116,12 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
+      cursor: pointer;
+
       span {
         width: 35px;
         display: flex;
         align-items: center;
-        padding-top: 3px;
       }
     }
   }

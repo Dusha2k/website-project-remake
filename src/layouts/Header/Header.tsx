@@ -1,14 +1,14 @@
-import React from "react";
-import { observer } from "mobx-react";
-import "./style.scss";
-import logo from "../../assets/img/logo.png";
+import React from 'react'
+import { observer } from 'mobx-react'
+import './style.scss'
+import logo from '../../assets/img/logo.png'
 
 const Header = () => {
   return (
     <header className="header">
       <div className="container">
         <div className="wrapper row align-content-center justify-content-between">
-          <img className="header__logo" src={logo} />
+          <img className="header__logo" src={logo} alt="logo" />
           <div className="header__navbar row align-content-center justify-content-between">
             <div>
               <span>Главная</span>
@@ -27,7 +27,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default observer(Header);
+export default observer(Header)
