@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import DetailsPageStore from '../../store/DetailsPageStore'
 import { observer } from 'mobx-react'
+import ReactPlayer from 'react-player'
 import './style.scss'
 
 const AnimeDetails = () => {
@@ -62,6 +63,11 @@ const AnimeDetails = () => {
               </ul>
             </div>
           </div>
+        </div>
+      )}
+      {currentAnime.videos?.[0].player_url && (
+        <div className="rc-player">
+          <ReactPlayer url={currentAnime.videos?.[0].player_url} width="100%" controls={true} height="100%" />
         </div>
       )}
     </div>

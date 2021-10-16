@@ -23,7 +23,7 @@
       }
       .lists {
         display: flex;
-        justify-content: space-between;
+        gap: 10%;
         ul {
           padding: 0;
           li {
@@ -38,6 +38,15 @@
           }
         }
       }
+    }
+  }
+  .rc-player {
+    height: 500px;
+    margin-top: 50px;
+    iframe {
+      border-radius: 10px;
+      box-shadow: black 3px 3px 20px;
+      border: unset;
     }
   }
 }

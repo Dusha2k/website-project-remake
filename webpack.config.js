@@ -1,47 +1,44 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const { HotModuleReplacementPlugin } = require("webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCssAssetPlugin = require("optimize-css-assets-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const path = require('path')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { HotModuleReplacementPlugin } = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const isDev = process.env.NODE_ENV === "development";
-const isProd = !isDev;
-console.log(isDev);
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = !isDev
+console.log(isDev)
 
 const optimization = () => {
   const config = {
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
     },
-  };
-  if (isProd) {
-    config.minimizer = [
-      new OptimizeCssAssetPlugin(),
-      new TerserWebpackPlugin(),
-    ];
   }
-  return config;
-};
+  if (isProd) {
+    config.minimizer = [new OptimizeCssAssetPlugin(), new TerserWebpackPlugin()]
+  }
+  return config
+}
 
-const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
+const filename = (ext) => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`)
 
 module.exports = {
   // mode: "development",
-  entry: ["@babel/polyfill", "./src/index.tsx"],
+  entry: ['@babel/polyfill', './src/index.tsx'],
   output: {
-    filename: filename("js"),
-    path: path.resolve(__dirname, "dist"),
+    filename: filename('js'),
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts"],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
   },
   optimization: optimization(),
   plugins: [
     new HTMLWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
       minify: {
         collapseWhitespace: isProd,
       },
@@ -52,51 +49,47 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: filename("css"),
+      filename: filename('css'),
     }),
   ],
   module: {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|jp2|webp)$/,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
       {
         test: /\.svg$/,
-        loader: "svg-inline-loader",
+        loader: 'svg-inline-loader',
       },
       {
         test: /\.(ttf|woff|woff2|eot)$/,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
       {
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: [
-                "@babel/preset-env",
-                "@babel/preset-react",
-                "@babel/preset-typescript",
-              ],
+              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
             },
           },
-          "eslint-loader",
+          'eslint-loader',
         ],
       },
     ],
   },
   devServer: {
-    static: path.join(__dirname, "./build"),
+    static: path.join(__dirname, './build'),
     historyApiFallback: true,
-    port: "8080",
+    port: '8080',
     open: true,
     hot: isDev,
   },
-};
+}

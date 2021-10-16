@@ -12,7 +12,7 @@ const App = (): JSX.Element => {
         <Header />
         <Switch>
           <Route path="/" component={Homepage} exact={true} />
-          <Route path="/animes/:id" component={AnimeDetails} />
+          <Route path="/animes/:id" component={AnimeDetails} exact />
         </Switch>
       </BrowserRouter>
     </>
