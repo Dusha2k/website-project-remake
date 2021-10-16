@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        <div className="wrapper row align-content-center justify-content-between">
+        <div className="row wrapper align-content-center justify-content-between">
           <img className="header__logo" src={logo} alt="logo" />
           <div className="header__navbar row align-content-center justify-content-between">
             <div>

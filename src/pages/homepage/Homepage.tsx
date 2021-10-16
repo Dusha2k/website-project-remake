@@ -8,7 +8,7 @@ import CardsHeader from '../../components/card/CardsHeader'
 
 const Homepage = () => {
   const { popularAnime, byRatingAnime, ongoingAnime, thisSeasonAnime, getAllAnime } = HomepageStore
-  const nullAnime = !popularAnime && !byRatingAnime && !ongoingAnime && !thisSeasonAnime
+  const nullAnime = !popularAnime.length && !byRatingAnime.length && !ongoingAnime.length && !thisSeasonAnime.length
 
   useEffect(() => {
     if (nullAnime) getAllAnime()
