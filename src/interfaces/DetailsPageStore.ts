@@ -1,6 +1,8 @@
 export interface IDetailsPageStore {
   currentAnime: IAnimeDetails
+  animeComments: Array<ICommentAnime>
   getCurrentAnime: (id: string) => void
+  getComments: (id: number, page?: string, limit?: string) => void
 }
 
 export interface IAnimeDetails {
@@ -29,4 +31,34 @@ export interface IAnimeDetails {
   videos: Array<{ hosting: string; player_url: string }>
   screenshots: []
   duration: string
+}
+
+export interface ICommentAnime {
+  body: string
+  can_be_edited: boolean
+  commentable_id: number
+  commentable_type: string
+  created_at: string
+  html_body: string
+  id: number
+  is_offtopic: boolean
+  is_summary: boolean
+  updated_at: string
+  user: IUserComment
+  user_id: number
+}
+
+export interface IUserComment {
+  avatar: string
+  id: number
+  image: {
+    x48: string
+    x64: string
+    x80: string
+    x148: string
+    x160: string
+  }
+  last_online_at: string
+  nickname: string
+  url: string
 }

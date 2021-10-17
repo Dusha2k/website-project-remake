@@ -4,14 +4,21 @@ import DetailsPageStore from '../../store/DetailsPageStore'
 import { observer } from 'mobx-react'
 import ReactPlayer from 'react-player'
 import './style.scss'
+import Comment from '../../components/comment/Comment'
 
 const AnimeDetails = () => {
   const { id } = useParams<{ id: string }>()
-  const { getCurrentAnime, currentAnime } = DetailsPageStore
+  const { getCurrentAnime, currentAnime, getComments, animeComments } = DetailsPageStore
+
   useEffect(() => {
     getCurrentAnime(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    getComments(currentAnime.topic_id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentAnime])
 
   return (
     <div className="container cur-anime">
@@ -68,6 +75,13 @@ const AnimeDetails = () => {
       {currentAnime.videos?.[0].player_url && (
         <div className="rc-player">
           <ReactPlayer url={currentAnime.videos?.[0].player_url} width="100%" controls={true} height="100%" />
+        </div>
+      )}
+      {animeComments && (
+        <div className="comments">
+          {animeComments.map((item) => (
+            <Comment item={item} key={item.id} />
+          ))}
         </div>
       )}
     </div>

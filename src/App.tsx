@@ -4,8 +4,10 @@ import { observer } from 'mobx-react'
 import Homepage from './pages/homepage/Homepage'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import AnimeDetails from './pages/animeDetails/AnimeDetails'
+import moment from 'moment'
 
 const App = (): JSX.Element => {
+  moment.locale('ru')
   return (
     <>
       <BrowserRouter>
