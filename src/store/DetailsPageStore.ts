@@ -16,7 +16,11 @@ class DetailsPageStore implements IDetailsPageStore {
   }
 
   getComments = async (id: number, page?: string, limit?: string) => {
-    this.animeComments = await requestsAnime.getAnimeComments(id, page, limit).then((res: any) => res.data)
+    const myRes = await requestsAnime.getAnimeComments(id, page, limit).then((res: any) => res.data)
+    //Удаление последнего коммента из-за косяка API, дублирует комментарии последние
+    myRes.pop()
+    this.animeComments.push(...myRes)
+    return myRes.length > 0 ? true : false
   }
 }
 

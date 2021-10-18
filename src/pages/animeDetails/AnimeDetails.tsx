@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DetailsPageStore from '../../store/DetailsPageStore'
 import { observer } from 'mobx-react'
 import ReactPlayer from 'react-player'
 import './style.scss'
 import Comment from '../../components/comment/Comment'
+import Button from '../../components/button/Button'
 
 const AnimeDetails = () => {
   const { id } = useParams<{ id: string }>()
   const { getCurrentAnime, currentAnime, getComments, animeComments } = DetailsPageStore
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     getCurrentAnime(id)
@@ -80,10 +82,21 @@ const AnimeDetails = () => {
       {animeComments && (
         <div className="comments">
           {animeComments.map((item) => (
-            <Comment item={item} key={item.id} />
+            <Comment item={item} key={item.created_at} />
           ))}
         </div>
       )}
+      <div className="more-comments">
+        <Button
+          color="light-blue"
+          borderRadius="5px"
+          text="ЕЩЁ КОММЕНТАРИИ"
+          onClick={() => {
+            setPage(page + 1)
+            getComments(currentAnime.topic_id, `${page}`)
+          }}
+        />
+      </div>
     </div>
   )
 }
