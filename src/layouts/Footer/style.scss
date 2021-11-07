@@ -1,0 +1,48 @@
+@import '../../styles/helpers';
+
+.footer {
+  background: #070720;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  position: relative;
+  &__arrow {
+    position: absolute;
+    border-radius: 50%;
+    background: $red;
+    top: -23px;
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      padding-top: 2px;
+      svg {
+        width: 50px;
+        height: 50px;
+        filter: invert(100%) sepia(48%) saturate(0%) hue-rotate(170deg) brightness(106%) contrast(101%);
+      }
+    }
+  }
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    img {
+      width: 93px;
+      height: 23px;
+    }
+    .icons {
+      display: flex;
+      gap: 20px;
+      span {
+        svg {
+          width: 25px;
+          height: 25px;
+          filter: invert(80%) sepia(6%) saturate(0%) hue-rotate(196deg) brightness(90%) contrast(93%);
+        }
+      }
+    }
+  }
+}

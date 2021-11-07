@@ -20,7 +20,12 @@ class DetailsPageStore implements IDetailsPageStore {
     //Удаление последнего коммента из-за косяка API, дублирует комментарии последние
     myRes.pop()
     this.animeComments.push(...myRes)
-    return myRes.length > 0 ? true : false
+    return myRes.length > 0
+  }
+
+  clearCurrentAnime = () => {
+    this.currentAnime = {} as IAnimeDetails
+    this.animeComments = []
   }
 }
 

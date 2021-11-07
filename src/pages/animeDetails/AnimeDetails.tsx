@@ -2,23 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DetailsPageStore from '../../store/DetailsPageStore'
 import { observer } from 'mobx-react'
-import ReactPlayer from 'react-player'
 import './style.scss'
 import Comment from '../../components/comment/Comment'
 import Button from '../../components/button/Button'
+import CardsHeader from '../../components/card/CardsHeader'
 
 const AnimeDetails = () => {
   const { id } = useParams<{ id: string }>()
-  const { getCurrentAnime, currentAnime, getComments, animeComments } = DetailsPageStore
+  const { getCurrentAnime, currentAnime, getComments, animeComments, clearCurrentAnime } = DetailsPageStore
   const [page, setPage] = useState(1)
 
   useEffect(() => {
     getCurrentAnime(id)
+    return () => {
+      clearCurrentAnime()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    getComments(currentAnime.topic_id)
+    if (Object.keys(currentAnime).length > 0) getComments(currentAnime.topic_id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAnime])
 
@@ -76,11 +79,12 @@ const AnimeDetails = () => {
       )}
       {currentAnime.videos?.[0].player_url && (
         <div className="rc-player">
-          <ReactPlayer url={currentAnime.videos?.[0].player_url} width="100%" controls={true} height="100%" />
+          <iframe title="video" src={currentAnime.videos?.[0].player_url} />
         </div>
       )}
       {animeComments && (
         <div className="comments">
+          <CardsHeader text="Комментарии" />
           {animeComments.map((item) => (
             <Comment item={item} key={item.created_at} />
           ))}
@@ -88,12 +92,12 @@ const AnimeDetails = () => {
       )}
       <div className="more-comments">
         <Button
-          color="light-blue"
+          color="red"
           borderRadius="5px"
           text="ЕЩЁ КОММЕНТАРИИ"
           onClick={() => {
             setPage(page + 1)
-            getComments(currentAnime.topic_id, `${page}`)
+            getComments(currentAnime.topic_id, `${page + 1}`)
           }}
         />
       </div>

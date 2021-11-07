@@ -40,14 +40,13 @@
       }
     }
   }
-  .rc-player {
+  iframe {
     height: 500px;
+    width: 100%;
     margin-top: 50px;
-    iframe {
-      border-radius: 10px;
-      box-shadow: black 3px 3px 20px;
-      border: unset;
-    }
+    border-radius: 10px;
+    box-shadow: black 3px 3px 20px;
+    border: unset;
   }
   .comments {
     margin-top: 35px;
@@ -59,5 +58,6 @@
     margin-top: 10px;
     display: flex;
     justify-content: center;
+    padding-bottom: 50px;
   }
 }

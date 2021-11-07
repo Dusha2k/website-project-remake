@@ -24,14 +24,14 @@ const Homepage = () => {
             <CardsHeader text={'популярное'} withArrow={true} />
             <div className="col row flex-wrap align-content-start justify-content-between left-side">
               {!nullAnime &&
-                ongoingAnime.map((item: any) => {
+                popularAnime.map((item: any) => {
                   return <Card {...item} key={item.id} />
                 })}
             </div>
             <CardsHeader text={'аниме этого сезона'} withArrow={true} />
             <div className="col row flex-wrap align-content-start justify-content-between left-side">
               {!nullAnime &&
-                ongoingAnime.map((item: any) => {
+                thisSeasonAnime.map((item: any) => {
                   return <Card {...item} key={item.id} />
                 })}
             </div>
