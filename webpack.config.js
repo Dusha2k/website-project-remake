@@ -93,7 +93,6 @@ module.exports = {
     static: path.join(__dirname, './build'),
     historyApiFallback: true,
     port: '8080',
-    contentBase: './',
     open: true,
     hot: isDev,
   },

@@ -25,6 +25,17 @@ const AnimeDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAnime])
 
+  const changeHttpToHttps = () => {
+    const src = currentAnime.videos?.[0].player_url.includes('https')
+      ? currentAnime.videos?.[0].player_url
+      : 'https:' + currentAnime.videos?.[0].player_url.split(':')[1]
+    return (
+      <div className="rc-player">
+        <iframe title="video" src={src as string} />
+      </div>
+    )
+  }
+
   return (
     <div className="container cur-anime">
       {currentAnime && (
@@ -77,11 +88,7 @@ const AnimeDetails = () => {
           </div>
         </div>
       )}
-      {currentAnime.videos?.[0].player_url && (
-        <div className="rc-player">
-          <iframe title="video" src={currentAnime.videos?.[0].player_url} />
-        </div>
-      )}
+      {currentAnime.videos?.[0].player_url && changeHttpToHttps()}
       {animeComments && (
         <div className="comments">
           <CardsHeader text="Комментарии" />
