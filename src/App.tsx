@@ -19,8 +19,8 @@ const App = (): JSX.Element => {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/" component={Homepage} exact={true} />
-          <Route path="/animes/:id" component={AnimeDetails} />
+          <Route path="/" component={Homepage} exact />
+          <Route path="/animes/:id" component={AnimeDetails} exact />
           <Route path="/profile/:id" component={ProfilePage} exact />
         </Switch>
         <Footer />

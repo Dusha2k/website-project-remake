@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
@@ -37,6 +38,9 @@ module.exports = {
   },
   optimization: optimization(),
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: 'public', to: '' }],
+    }),
     new HTMLWebpackPlugin({
       template: './src/index.html',
       minify: {
