@@ -13,6 +13,7 @@ const App = (): JSX.Element => {
   moment.locale('ru')
   defaults.color = '#fff'
   defaults.scale.grid.display = false
+
   return (
     <>
       <BrowserRouter>
