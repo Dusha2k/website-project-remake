@@ -3,21 +3,21 @@ import ProfileStore from '../../store/ProfileStore'
 import { useParams } from 'react-router-dom'
 import { observer } from 'mobx-react'
 import parser from 'html-react-parser'
-import { Pie } from 'react-chartjs-2'
+import { Pie, Bar } from 'react-chartjs-2'
 import CardsHeader from '../../components/card/CardsHeader'
 import { NavLink } from 'react-router-dom'
+import moment from 'moment'
 
 const ProfilePage = () => {
   const { getCurrentProfile, currentProfile, currentProfileClubs, currentProfileFriends, currentProfileFavourites } =
     ProfileStore
+
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     getCurrentProfile(+id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  console.log('currentProfile', currentProfile)
 
   const createPersonalData = (data: any) => {
     return data.confirm ? (
@@ -126,6 +126,23 @@ const ProfilePage = () => {
                         backgroundColor: pieBGColors,
                         borderColor: pieBRColors,
                         borderWidth: 1,
+                      },
+                    ],
+                  }}
+                />
+              </div>
+              <div className="activity-bar" style={{ width: '400px', height: '400px' }}>
+                <Bar
+                  data={{
+                    labels: currentProfile.stats.activity.map((item) =>
+                      moment(+item.name[1] * 1000).format('MMM YYYY'),
+                    ),
+                    datasets: [
+                      {
+                        label: 'Активность на сайте',
+                        data: currentProfile.stats.activity.map((item) => item.value),
+                        backgroundColor: ['rgba(84,231,255,0.8)'],
+                        borderColor: ['rgba(84,231,255,1)'],
                       },
                     ],
                   }}

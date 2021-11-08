@@ -23,6 +23,7 @@ export interface IProfileInfo {
   nickname: string
   sex: string
   stats: {
+    activity: Array<{ name: Array<string>; value: number }>
     statuses: {
       anime: Array<IProfileStatus>
       manga: Array<IProfileStatus>

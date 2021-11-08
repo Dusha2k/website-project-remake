@@ -7,16 +7,19 @@ import AnimeDetails from './pages/animeDetails/AnimeDetails'
 import ProfilePage from './pages/profile/ProfilePage'
 import moment from 'moment'
 import Footer from './layouts/Footer/Footer'
+import { defaults } from 'react-chartjs-2'
 
 const App = (): JSX.Element => {
   moment.locale('ru')
+  defaults.color = '#fff'
+  defaults.scale.grid.display = false
   return (
     <>
       <BrowserRouter>
         <Header />
         <Switch>
           <Route path="/" component={Homepage} exact={true} />
-          <Route path="/animes/:id" component={AnimeDetails} exact />
+          <Route path="/animes/:id" component={AnimeDetails} />
           <Route path="/profile/:id" component={ProfilePage} exact />
         </Switch>
         <Footer />
