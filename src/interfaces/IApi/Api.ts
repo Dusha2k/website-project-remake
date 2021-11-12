@@ -10,3 +10,8 @@ export interface IProfileRequests {
   getClubsProfile: (id: number) => Promise<any>
   getFavouritesProfile: (id: number) => Promise<any>
 }
+
+export interface IClubsRequests {
+  getAllClubs: () => Promise<any>
+  getCurrentClub: (id: number) => Promise<any>
+}

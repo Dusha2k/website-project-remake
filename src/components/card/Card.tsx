@@ -2,7 +2,7 @@ import React from 'react'
 import Star from '../../assets/icons/star-solid.svg'
 import './style.scss'
 import { observer } from 'mobx-react'
-import { ICardProps } from '../../interfaces/Card'
+import { ICardProps } from '../../interfaces/IComponents/Card'
 import cn from 'classnames'
 import { useHistory } from 'react-router-dom'
 

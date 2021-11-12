@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss'
 import { NavLink } from 'react-router-dom'
-import { ICommentAnime } from '../../interfaces/DetailsPageStore'
+import { ICommentAnime } from '../../interfaces/IStore/DetailsPageStore'
 import moment from 'moment'
 
 type CommentProps = {

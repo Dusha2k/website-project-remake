@@ -1,6 +1,6 @@
-import { IHomepageStore } from '../interfaces/HomepageStore'
+import { IHomepageStore } from '../interfaces/IStore/HomepageStore'
 import { makeAutoObservable } from 'mobx'
-import requestsAnime from '../api/anime'
+import requestsAnime from '../api/Anime'
 
 class HomepageStore implements IHomepageStore {
   popularAnime = []

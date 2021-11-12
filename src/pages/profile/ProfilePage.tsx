@@ -7,6 +7,7 @@ import { Pie, Bar } from 'react-chartjs-2'
 import CardsHeader from '../../components/card/CardsHeader'
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
+import { IProfileClubs, IProfileFriends } from '../../interfaces/IStore/ProfileStore'
 
 const ProfilePage = () => {
   const { getCurrentProfile, currentProfile, currentProfileClubs, currentProfileFriends, currentProfileFavourites } =
@@ -152,10 +153,10 @@ const ProfilePage = () => {
             <div className="profile-clubs">
               <CardsHeader text="Клубы" />
               {currentProfileClubs.length > 0 ? (
-                currentProfileClubs?.map((item: any, index) => {
+                currentProfileClubs?.map((item: IProfileClubs, index) => {
                   if (index < 6) {
                     return (
-                      <NavLink to="/">
+                      <NavLink to={`/clubs/${item.id}`}>
                         <img src={`https://dere.shikimori.one${item.logo.x73}`} alt="avatar-clubs" />
                       </NavLink>
                     )
@@ -169,8 +170,8 @@ const ProfilePage = () => {
             <div className="profile-friends">
               <CardsHeader text="Друзья" />
               <div>
-                {currentProfileClubs.length > 0 ? (
-                  currentProfileFriends?.map((item: any, index) => {
+                {currentProfileFriends.length > 0 ? (
+                  currentProfileFriends?.map((item: IProfileFriends, index) => {
                     if (index < 12) {
                       return (
                         <NavLink to="/">

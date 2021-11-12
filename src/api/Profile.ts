@@ -1,5 +1,5 @@
-import { IProfileRequests } from '../interfaces/Api'
-import { getRequest } from './request'
+import { IProfileRequests } from '../interfaces/IApi/Api'
+import { getRequest } from './Request'
 
 const requestsProfile: IProfileRequests = {
   getCurrentProfile: (id: number) => getRequest(`users/${id}`),

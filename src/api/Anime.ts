@@ -1,5 +1,5 @@
-import { getRequest } from './request'
-import { IAnimeListRequests } from '../interfaces/Api'
+import { getRequest } from './Request'
+import { IAnimeListRequests } from '../interfaces/IApi/Api'
 
 const requestsAnime: IAnimeListRequests = {
   getAnimeList: (param, page = '1', limit = '12') => getRequest(`animes?page=${page}&limit=${limit}&${param}`),

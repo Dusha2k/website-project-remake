@@ -22,6 +22,7 @@ const App = (): JSX.Element => {
           <Route path="/" component={Homepage} exact />
           <Route path="/animes/:id" component={AnimeDetails} exact />
           <Route path="/profile/:id" component={ProfilePage} exact />
+          <Route path="/clubs/:id" component={ProfilePage} exact />
         </Switch>
         <Footer />
       </BrowserRouter>

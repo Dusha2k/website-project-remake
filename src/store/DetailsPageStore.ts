@@ -1,6 +1,6 @@
-import { IAnimeDetails, IDetailsPageStore, ICommentAnime } from '../interfaces/DetailsPageStore'
+import { IAnimeDetails, IDetailsPageStore, ICommentAnime } from '../interfaces/IStore/DetailsPageStore'
 import { makeAutoObservable } from 'mobx'
-import requestsAnime from '../api/anime'
+import requestsAnime from '../api/Anime'
 
 class DetailsPageStore implements IDetailsPageStore {
   currentAnime: IAnimeDetails = {} as IAnimeDetails

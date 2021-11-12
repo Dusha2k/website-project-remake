@@ -1,6 +1,6 @@
-import { IProfile, IProfileInfo, IProfileFavourites } from '../interfaces/ProfileStore'
+import { IProfile, IProfileInfo, IProfileFavourites } from '../interfaces/IStore/ProfileStore'
 import { makeAutoObservable } from 'mobx'
-import requestsProfile from '../api/profile'
+import requestsProfile from '../api/Profile'
 
 class ProfileStore implements IProfile {
   currentProfile = {} as IProfileInfo
