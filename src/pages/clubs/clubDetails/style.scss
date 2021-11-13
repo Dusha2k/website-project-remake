@@ -1,6 +1,7 @@
 .l-page {
   position: relative;
   z-index: 1;
+  padding-top: 30px;
   h1 {
     display: inline-block;
     font-family: 'Oswald', sans-serif;
@@ -10,6 +11,9 @@
     .l-content {
       margin-right: 25px;
       width: 82% !important;
+      img {
+        max-width: 100%;
+      }
       a {
         color: deepskyblue;
         text-decoration: none;
@@ -24,8 +28,31 @@
       width: 18%;
     }
   }
-  img {
-    max-width: 100%;
+
+  .clubs-images {
+    a {
+      text-decoration: unset;
+    }
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      img {
+        max-width: 15%;
+        max-height: 200px;
+      }
+    }
+  }
+
+  .clubs-comments {
+    .comment__wrapper {
+      margin-bottom: 12px;
+    }
+    .more-comments {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 50px;
+    }
   }
 }
 

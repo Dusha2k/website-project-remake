@@ -38,7 +38,7 @@ const ClubNavbar = ({ club }: ClubProps) => {
           <div>
             {club.mangas.slice(0, 12).map((item) => {
               return (
-                <NavLink key={item.name} to={`/mangas/${item.id}`}>
+                <NavLink key={item.id} to={`/mangas/${item.id}`}>
                   <img src={`https://shikimori.one${item.image.original}`} alt={item.name} />
                 </NavLink>
               )
@@ -54,7 +54,7 @@ const ClubNavbar = ({ club }: ClubProps) => {
           <div>
             {club.characters.slice(0, 12).map((item) => {
               return (
-                <NavLink key={item.name} to={`/characters/${item.id}`}>
+                <NavLink key={item.id} to={`/characters/${item.id}`}>
                   <img src={`https://shikimori.one${item.image.original}`} alt={item.name} />
                 </NavLink>
               )
@@ -70,7 +70,7 @@ const ClubNavbar = ({ club }: ClubProps) => {
           <div>
             {club.members.slice(0, 12).map((item) => {
               return (
-                <NavLink key={item.nickname} to={`/profile/${item.id}`}>
+                <NavLink key={item.id} to={`/profile/${item.id}`}>
                   <img className="member-img" src={item.image.x64} alt={item.image.x64} />
                 </NavLink>
               )

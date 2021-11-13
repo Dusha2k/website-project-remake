@@ -1,14 +1,19 @@
 import { IAnimeCard } from './HomepageStore'
 import requestsClubs from '../../api/Clubs'
+import { ICommentAnime } from './DetailsPageStore'
 
 export interface IClubsDetailsStore {
   currentClub: IClubDetails
 
   allClubs: IClubDetails[]
 
+  clubComments: ICommentAnime[]
+
   getAllClubs: () => void
 
   getCurrentClub: (id: number) => void
+
+  getCommentsClub: (id: number, page?: string, limit?: string) => void
 }
 
 export interface IClubDetails {
