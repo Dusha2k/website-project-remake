@@ -132,23 +132,25 @@ const ProfilePage = () => {
                   }}
                 />
               </div>
-              <div className="activity-bar" style={{ width: '400px', height: '400px' }}>
-                <Bar
-                  data={{
-                    labels: currentProfile.stats.activity.map((item) =>
-                      moment(+item.name[1] * 1000).format('MMM YYYY'),
-                    ),
-                    datasets: [
-                      {
-                        label: 'Активность на сайте',
-                        data: currentProfile.stats.activity.map((item) => item.value),
-                        backgroundColor: ['rgba(84,231,255,0.8)'],
-                        borderColor: ['rgba(84,231,255,1)'],
-                      },
-                    ],
-                  }}
-                />
-              </div>
+              {currentProfile?.stats?.activity.length && (
+                <div className="activity-bar" style={{ width: '400px', height: '400px' }}>
+                  <Bar
+                    data={{
+                      labels: currentProfile.stats.activity.map((item) =>
+                        moment(+item.name[1] * 1000).format('MMM YYYY'),
+                      ),
+                      datasets: [
+                        {
+                          label: 'Активность на сайте',
+                          data: currentProfile.stats.activity.map((item) => item.value),
+                          backgroundColor: ['rgba(84,231,255,0.8)'],
+                          borderColor: ['rgba(84,231,255,1)'],
+                        },
+                      ],
+                    }}
+                  />
+                </div>
+              )}
             </div>
             <div className="profile-clubs">
               <CardsHeader text="Клубы" />

@@ -4,7 +4,11 @@
   background: #070720;
   padding-top: 60px;
   padding-bottom: 40px;
-  position: relative;
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
   &__arrow {
     position: absolute;
     border-radius: 50%;

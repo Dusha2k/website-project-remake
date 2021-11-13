@@ -8,7 +8,7 @@ export interface IClubsDetailsStore {
 
   getAllClubs: () => void
 
-  getCurrentClub: () => void
+  getCurrentClub: (id: number) => void
 }
 
 export interface IClubDetails {
