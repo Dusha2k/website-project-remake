@@ -1,15 +1,31 @@
 .l-page {
   position: relative;
   z-index: 1;
+  h1 {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif;
+  }
+  .menu {
+    display: flex;
+    .l-content {
+      margin-right: 25px;
+      width: 82% !important;
+      a {
+        color: deepskyblue;
+        text-decoration: none;
+      }
+      span,
+      div,
+      p {
+        color: #b7b7b7;
+      }
+    }
+    .r-menu {
+      width: 18%;
+    }
+  }
   img {
     max-width: 100%;
-  }
-  .l-content {
-    span,
-    div,
-    p {
-      color: #b7b7b7;
-    }
   }
 }
 

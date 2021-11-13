@@ -20,14 +20,16 @@ const App = (): JSX.Element => {
     <>
       <BrowserRouter>
         <Header />
-        <Switch>
-          <Route path="/" component={Homepage} exact />
-          <Route path="/animes/:id" component={AnimeDetails} exact />
-          <Route path="/profile/:id" component={ProfilePage} exact />
-          <Route path="/clubs/:id" component={ClubDetailsPage} exact />
-          <Route path="/404" component={NotFoundPage} />
-          <Redirect to="/404" />
-        </Switch>
+        <div className="content">
+          <Switch>
+            <Route path="/" component={Homepage} exact />
+            <Route path="/animes/:id" component={AnimeDetails} exact />
+            <Route path="/profile/:id" component={ProfilePage} exact />
+            <Route path="/clubs/:id" component={ClubDetailsPage} exact />
+            <Route path="/404" component={NotFoundPage} />
+            <Redirect to="/404" />
+          </Switch>
+        </div>
         <Footer />
       </BrowserRouter>
     </>

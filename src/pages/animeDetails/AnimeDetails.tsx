@@ -88,7 +88,7 @@ const AnimeDetails = () => {
           </div>
         </div>
       )}
-      {currentAnime.videos?.[0].player_url && changeHttpToHttps()}
+      {currentAnime.videos?.[0]?.player_url && changeHttpToHttps()}
       {animeComments && (
         <div className="comments">
           <CardsHeader text="Комментарии" />

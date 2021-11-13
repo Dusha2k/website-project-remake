@@ -1,0 +1,28 @@
+.club-navbar {
+  &__image {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 215px;
+      height: 215px;
+    }
+  }
+  &__widgets {
+    > a {
+      text-decoration: unset;
+    }
+    > div {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      img {
+        width: 53px;
+        height: 76px;
+      }
+      .member-img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}

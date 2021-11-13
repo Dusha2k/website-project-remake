@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { observer } from 'mobx-react'
 import parser from 'html-react-parser'
 import { getRequest } from '../../../api/Request'
+import ClubNavbar from '../../../components/clubNavbar/ClubNavbar'
 import './style.scss'
 
 const ClubDetailsPage = () => {
@@ -15,21 +16,23 @@ const ClubDetailsPage = () => {
     getCurrentClub(+id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  //Получение кастомных стилей
   useEffect(() => {
     if (Object.values(currentClub).length > 0) {
       getRequest(`styles/${currentClub.style_id}`).then((res: any) => setStyle(res.data))
     }
   }, [currentClub])
 
+  //Установка кастомных стилей
   useEffect(() => {
-    let myStyle: any
     if (style) {
-      myStyle = document.createElement('style')
+      const myStyle = document.createElement('style')
       document.head.appendChild(myStyle)
       myStyle.innerHTML = style.compiled_css ? style.compiled_css : ''
     }
     return () => {
-      myStyle = document.getElementsByName('style')
+      const myStyle: any = document.getElementsByName('style')
       myStyle.innerHTML = ''
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +41,7 @@ const ClubDetailsPage = () => {
     <>
       {Object.values(currentClub).length > 0 && (
         <div className="club container l-page">
-          <h1>{}</h1>
+          <h1>{currentClub.name}</h1>
           <div className="menu">
             <div className="l-content">
               <div>
@@ -46,7 +49,9 @@ const ClubDetailsPage = () => {
                 <div>{currentClub.description_html && parser(currentClub?.description_html)}</div>
               </div>
             </div>
-            <div className="l-menu"></div>
+            <div className="r-menu">
+              <ClubNavbar club={currentClub} />
+            </div>
           </div>
         </div>
       )}
