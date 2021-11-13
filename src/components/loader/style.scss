@@ -1,0 +1,94 @@
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -50px -50px;
+}
+
+#c_shape {
+  animation: loader 1.5s linear infinite;
+  transform-origin: 62.1px 60.3px;
+  animation-play-state: running !important;
+}
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loader rect {
+  animation: none 1.5s linear infinite;
+  display: inline-block;
+  animation-play-state: running !important;
+}
+#loader rect:nth-child(1) {
+  animation-name: loader1;
+}
+#loader rect:nth-child(2) {
+  animation-name: loader2;
+}
+#loader rect:nth-child(3) {
+  animation-name: loader3;
+}
+#loader rect:nth-child(4) {
+  animation-name: loader4;
+}
+#loader rect:nth-child(5) {
+  animation-name: loader5;
+}
+
+@keyframes loader1 {
+  0% {
+    fill: #3e2c53;
+  }
+  33.3333% {
+    fill: #ac2b61;
+  }
+  66.6666% {
+    fill: #f3e3b4;
+  }
+}
+@keyframes loader2 {
+  0% {
+    fill: #3f577a;
+  }
+  33.3333% {
+    fill: #e33d5f;
+  }
+  66.6666% {
+    fill: #badcc8;
+  }
+}
+@keyframes loader3 {
+  0% {
+    fill: #4c8fa2;
+  }
+  33.3333% {
+    fill: #ef7c5e;
+  }
+  66.6666% {
+    fill: #7fc7bf;
+  }
+}
+@keyframes loader4 {
+  0% {
+    fill: #7bb594;
+  }
+  33.3333% {
+    fill: #f9c65f;
+  }
+  66.6666% {
+    fill: #ee7b73;
+  }
+}
+@keyframes loader5 {
+  0% {
+    fill: #dbd17f;
+  }
+  33.3333% {
+    fill: #f5ef9e;
+  }
+  66.6666% {
+    fill: #d4385f;
+  }
+}

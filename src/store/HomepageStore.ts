@@ -1,6 +1,7 @@
 import { IHomepageStore } from '../interfaces/IStore/HomepageStore'
 import { makeAutoObservable } from 'mobx'
 import requestsAnime from '../api/Anime'
+import { handler } from '../helpers/decorator'
 
 class HomepageStore implements IHomepageStore {
   popularAnime = []
@@ -12,10 +13,11 @@ class HomepageStore implements IHomepageStore {
   byRatingAnime = []
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, {}, { autoBind: true })
   }
 
-  getAllAnime = async () => {
+  @handler
+  async getAllAnime() {
     this.popularAnime = await requestsAnime.getAnimeList('order=popularity').then((response: any) => response.data)
     this.thisSeasonAnime = await requestsAnime
       .getAnimeList(`order=popularity&season=${new Date().getFullYear()}`)

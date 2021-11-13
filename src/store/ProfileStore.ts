@@ -1,6 +1,7 @@
 import { IProfile, IProfileInfo, IProfileFavourites } from '../interfaces/IStore/ProfileStore'
 import { makeAutoObservable } from 'mobx'
 import requestsProfile from '../api/Profile'
+import { handler } from '../helpers/decorator'
 
 class ProfileStore implements IProfile {
   currentProfile = {} as IProfileInfo
@@ -12,10 +13,11 @@ class ProfileStore implements IProfile {
   currentProfileFavourites = {} as IProfileFavourites
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, {}, { autoBind: true })
   }
 
-  getCurrentProfile = async (id: number) => {
+  @handler
+  async getCurrentProfile(id: number) {
     this.currentProfile = await requestsProfile.getCurrentProfile(id).then((res: any) => res.data)
 
     this.currentProfileFriends = await requestsProfile.getFriendsProfile(id).then((res: any) => res.data)

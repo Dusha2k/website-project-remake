@@ -8,15 +8,19 @@ import CardsHeader from '../../components/card/CardsHeader'
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { IProfileClubs, IProfileFriends } from '../../interfaces/IStore/ProfileStore'
+import Loader from '../../components/loader/Loader'
+import NotificationStore from '../../store/NotificationStore'
 
 const ProfilePage = () => {
   const { getCurrentProfile, currentProfile, currentProfileClubs, currentProfileFriends, currentProfileFavourites } =
     ProfileStore
+  const { loading } = NotificationStore
 
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     getCurrentProfile(+id)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -51,6 +55,13 @@ const ProfilePage = () => {
     }
   }
 
+  const validUrlForImage = (url: string) => {
+    const arr = url.split('/')
+    arr[3] = 'preview'
+    const validUrl = arr.join('/')
+    return `https://dere.shikimori.one${validUrl}`
+  }
+
   const createFavouritesData = () => {
     const favouritesData = [
       ...currentProfileFavourites.animes,
@@ -60,17 +71,15 @@ const ProfilePage = () => {
       ...currentProfileFavourites.mangas,
       ...currentProfileFavourites.mangakas,
       ...currentProfileFavourites.seyu,
-    ].map((item, index) => {
-      if (index < 8) {
+    ]
+      .slice(0, 8)
+      .map((item, index) => {
         return (
-          <NavLink to="/">
-            <img src={`https://dere.shikimori.one${item.image}`} alt="profile-favourites" />
+          <NavLink key={item.image} to="/">
+            <img src={validUrlForImage(item.image)} alt="profile-favourites" />
           </NavLink>
         )
-      }
-      return undefined
-    })
-    console.log(favouritesData)
+      })
 
     return favouritesData.length > 0 ? favouritesData : [<span>Список избранного пуст</span>]
   }
@@ -89,6 +98,8 @@ const ProfilePage = () => {
     'rgba(153, 102, 255, 1)',
     'rgba(255, 159, 64, 1)',
   ]
+
+  if (loading.getCurrentProfile) return <Loader />
 
   return (
     <div className="profile container">
@@ -155,15 +166,12 @@ const ProfilePage = () => {
             <div className="profile-clubs">
               <CardsHeader text="Клубы" />
               {currentProfileClubs.length > 0 ? (
-                currentProfileClubs?.map((item: IProfileClubs, index) => {
-                  if (index < 6) {
-                    return (
-                      <NavLink to={`/clubs/${item.id}`}>
-                        <img src={`https://dere.shikimori.one${item.logo.x73}`} alt="avatar-clubs" />
-                      </NavLink>
-                    )
-                  }
-                  return null
+                currentProfileClubs?.slice(0, 6).map((item: IProfileClubs, index) => {
+                  return (
+                    <NavLink key={item.id} to={`/clubs/${item.id}`}>
+                      <img src={`https://dere.shikimori.one${item.logo.x73}`} alt="avatar-clubs" />
+                    </NavLink>
+                  )
                 })
               ) : (
                 <span>Не состоит ни в одном из клубов</span>
@@ -173,15 +181,12 @@ const ProfilePage = () => {
               <CardsHeader text="Друзья" />
               <div>
                 {currentProfileFriends.length > 0 ? (
-                  currentProfileFriends?.map((item: IProfileFriends, index) => {
-                    if (index < 12) {
-                      return (
-                        <NavLink to="/">
-                          <img src={item.image.x64} alt="avatar-friends" />
-                        </NavLink>
-                      )
-                    }
-                    return null
+                  currentProfileFriends?.slice(0, 12).map((item: IProfileFriends, index) => {
+                    return (
+                      <NavLink key={item.id} to="/">
+                        <img src={item.image.x64} alt="avatar-friends" />
+                      </NavLink>
+                    )
                   })
                 ) : (
                   <span>Нет друзей</span>

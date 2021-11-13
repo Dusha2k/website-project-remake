@@ -6,19 +6,24 @@ import './style.scss'
 import Comment from '../../components/comment/Comment'
 import Button from '../../components/button/Button'
 import CardsHeader from '../../components/card/CardsHeader'
+import NotificationStore from '../../store/NotificationStore'
+import Loader from '../../components/loader/Loader'
 
 const AnimeDetails = () => {
   const { id } = useParams<{ id: string }>()
-  const { getCurrentAnime, currentAnime, getComments, animeComments, clearCurrentAnime } = DetailsPageStore
+  const { getCurrentAnime, currentAnime, getComments, animeComments, clearCommentsAnime } = DetailsPageStore
+  const { loading } = NotificationStore
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    getCurrentAnime(id)
-    return () => {
-      clearCurrentAnime()
-    }
+    clearCommentsAnime()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    getCurrentAnime(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
 
   useEffect(() => {
     if (Object.keys(currentAnime).length > 0) getComments(currentAnime.topic_id)
@@ -35,6 +40,8 @@ const AnimeDetails = () => {
       </div>
     )
   }
+
+  if (loading.getCurrentAnime || loading.getComments) return <Loader />
 
   return (
     <div className="container cur-anime">

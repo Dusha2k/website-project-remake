@@ -5,15 +5,20 @@ import Card from '../../components/card/Card'
 import './style.scss'
 import Carousel from '../../components/carousel/Carousel'
 import CardsHeader from '../../components/card/CardsHeader'
+import Loader from '../../components/loader/Loader'
+import NotificationStore from '../../store/NotificationStore'
 
 const Homepage = () => {
   const { popularAnime, byRatingAnime, ongoingAnime, thisSeasonAnime, getAllAnime } = HomepageStore
   const nullAnime = !popularAnime.length && !byRatingAnime.length && !ongoingAnime.length && !thisSeasonAnime.length
+  const { loading } = NotificationStore
 
   useEffect(() => {
     if (nullAnime) getAllAnime()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (loading.getAllAnime) return <Loader />
 
   return (
     <div className="homepage container">

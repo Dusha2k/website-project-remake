@@ -9,22 +9,32 @@ import CardsHeader from '../../../components/card/CardsHeader'
 import { NavLink } from 'react-router-dom'
 import Comment from '../../../components/comment/Comment'
 import Button from '../../../components/button/Button'
+import NotificationStore from '../../../store/NotificationStore'
+import Loader from '../../../components/loader/Loader'
 import './style.scss'
 
 const ClubDetailsPage = () => {
-  const { getCurrentClub, currentClub, getCommentsClub, clubComments } = ClubDetailsStore
+  const { getCurrentClub, currentClub, getCommentsClub, clubComments, clearCommentsClub } = ClubDetailsStore
   const { id } = useParams<{ id: string }>()
   const [style, setStyle] = useState<any>()
   const [currentPage, setCurrentPage] = useState<number>(1)
+  const { loading } = NotificationStore
 
   useEffect(() => {
     getCurrentClub(+id)
+
+    return () => {
+      clearCommentsClub()
+      setStyle(null)
+      const myStyle = document.head.getElementsByTagName('style')
+      myStyle[0].innerHTML = ''
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   //Получение кастомных стилей
   useEffect(() => {
-    if (Object.values(currentClub).length > 0) {
+    if (Object.values(currentClub).length > 0 && !loading.getCurrentClub) {
       getRequest(`styles/${currentClub.style_id}`).then((res: any) => setStyle(res.data))
       getCommentsClub(currentClub.topic_id)
     }
@@ -34,16 +44,14 @@ const ClubDetailsPage = () => {
   //Установка кастомных стилей
   useEffect(() => {
     if (style) {
-      const myStyle = document.createElement('style')
-      document.head.appendChild(myStyle)
-      myStyle.innerHTML = style.compiled_css ? style.compiled_css : ''
-    }
-    return () => {
-      const myStyle: any = document.getElementsByName('style')
-      myStyle.innerHTML = ''
+      const myStyle = document.head.getElementsByTagName('style')
+      myStyle[0].innerHTML = style.compiled_css ? style.compiled_css : ''
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [style])
+
+  if (loading.getCurrentClub || loading.getCommentsClub) return <Loader />
+
   return (
     <>
       {Object.values(currentClub).length > 0 && (

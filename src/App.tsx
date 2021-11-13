@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './layouts/Header/Header'
 import { observer } from 'mobx-react'
 import Homepage from './pages/homepage/Homepage'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import AnimeDetails from './pages/animeDetails/AnimeDetails'
 import ProfilePage from './pages/profile/ProfilePage'
 import NotFoundPage from './pages/notFound/NotFoundPage'
@@ -27,7 +27,7 @@ const App = (): JSX.Element => {
             <Route path="/profile/:id" component={ProfilePage} exact />
             <Route path="/clubs/:id" component={ClubDetailsPage} exact />
             <Route path="/404" component={NotFoundPage} />
-            <Redirect to="/404" />
+            {/*<Redirect to="/404" />*/}
           </Switch>
         </div>
         <Footer />
