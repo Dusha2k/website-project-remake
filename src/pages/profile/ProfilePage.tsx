@@ -116,6 +116,7 @@ const ProfilePage = () => {
               {findPersonalData()}
               <div className="profile_pies">
                 <div className="anime-pie">
+                  <div>Аниме</div>
                   <Bar
                     data={{
                       labels: ['Запланировано', 'Смотрю', 'Просмотрено', 'Отложено', 'Брошено'],
@@ -129,12 +130,19 @@ const ProfilePage = () => {
                         },
                       ],
                     }}
+                    options={{
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
+                    }}
                     width={400}
                     height={200}
-                    options={{ maintainAspectRatio: false }}
                   />
                 </div>
                 <div className="manga-pie">
+                  <div>Манга</div>
                   <Bar
                     data={{
                       labels: ['Запланировано', 'Смотрю', 'Просмотрено', 'Отложено', 'Брошено'],
@@ -147,6 +155,13 @@ const ProfilePage = () => {
                           borderWidth: 1,
                         },
                       ],
+                    }}
+                    options={{
+                      plugins: {
+                        legend: {
+                          display: false,
+                        },
+                      },
                     }}
                     width={400}
                     height={200}
@@ -193,7 +208,7 @@ const ProfilePage = () => {
       )}
       <div className="second_section">
         {currentProfile?.stats?.activity.length && (
-          <div className="activity-bar" style={{ width: '400px', height: '400px' }}>
+          <div className="activity-bar">
             <Bar
               data={{
                 labels: currentProfile.stats.activity.map((item) => moment(+item.name[1] * 1000).format('MMM YYYY')),
