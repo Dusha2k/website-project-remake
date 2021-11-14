@@ -3,13 +3,14 @@ import ProfileStore from '../../store/ProfileStore'
 import { useParams } from 'react-router-dom'
 import { observer } from 'mobx-react'
 import parser from 'html-react-parser'
-import { Pie, Bar } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 import CardsHeader from '../../components/card/CardsHeader'
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 import { IProfileClubs, IProfileFriends } from '../../interfaces/IStore/ProfileStore'
 import Loader from '../../components/loader/Loader'
 import NotificationStore from '../../store/NotificationStore'
+import './style.scss'
 
 const ProfilePage = () => {
   const { getCurrentProfile, currentProfile, currentProfileClubs, currentProfileFriends, currentProfileFavourites } =
@@ -107,99 +108,112 @@ const ProfilePage = () => {
         <div className="first_section">
           <img alt="avatar" src={currentProfile.image?.x160} />
           <div>
-            <div>
-              <h3>{currentProfile.nickname}</h3>
-              <span>{currentProfile.last_online}</span>
+            <div className="profile_information">
+              <div className="profile_nickname">
+                <h3>{currentProfile.nickname}</h3>
+                <span>{currentProfile.last_online}</span>
+              </div>
               {findPersonalData()}
-            </div>
-            <div>
-              <div className="anime-pie" style={{ width: '300px', height: '300px' }}>
-                <Pie
-                  data={{
-                    labels: ['Запланировано', 'Смотрю', 'Просмотрено', 'Отложено', 'Брошено'],
-                    datasets: [
-                      {
-                        data: currentProfile.stats.statuses.anime.map((item) => item.size),
-                        backgroundColor: pieBGColors,
-                        borderColor: pieBRColors,
-                        borderWidth: 1,
-                      },
-                    ],
-                  }}
-                />
-              </div>
-              <div className="manga-pie" style={{ width: '300px', height: '300px' }}>
-                <Pie
-                  data={{
-                    labels: ['Запланировано', 'Смотрю', 'Просмотрено', 'Отложено', 'Брошено'],
-                    datasets: [
-                      {
-                        data: currentProfile.stats.statuses.manga.map((item) => item.size),
-                        backgroundColor: pieBGColors,
-                        borderColor: pieBRColors,
-                        borderWidth: 1,
-                      },
-                    ],
-                  }}
-                />
-              </div>
-              {currentProfile?.stats?.activity.length && (
-                <div className="activity-bar" style={{ width: '400px', height: '400px' }}>
+              <div className="profile_pies">
+                <div className="anime-pie">
                   <Bar
                     data={{
-                      labels: currentProfile.stats.activity.map((item) =>
-                        moment(+item.name[1] * 1000).format('MMM YYYY'),
-                      ),
+                      labels: ['Запланировано', 'Смотрю', 'Просмотрено', 'Отложено', 'Брошено'],
                       datasets: [
                         {
-                          label: 'Активность на сайте',
-                          data: currentProfile.stats.activity.map((item) => item.value),
-                          backgroundColor: ['rgba(84,231,255,0.8)'],
-                          borderColor: ['rgba(84,231,255,1)'],
+                          label: '',
+                          data: currentProfile.stats.statuses.anime.map((item) => item.size),
+                          backgroundColor: pieBGColors,
+                          borderColor: pieBRColors,
+                          borderWidth: 1,
                         },
                       ],
                     }}
+                    width={400}
+                    height={200}
+                    options={{ maintainAspectRatio: false }}
                   />
                 </div>
-              )}
-            </div>
-            <div className="profile-clubs">
-              <CardsHeader text="Клубы" />
-              {currentProfileClubs.length > 0 ? (
-                currentProfileClubs?.slice(0, 6).map((item: IProfileClubs, index) => {
-                  return (
-                    <NavLink key={item.id} to={`/clubs/${item.id}`}>
-                      <img src={`https://dere.shikimori.one${item.logo.x73}`} alt="avatar-clubs" />
-                    </NavLink>
-                  )
-                })
-              ) : (
-                <span>Не состоит ни в одном из клубов</span>
-              )}
-            </div>
-            <div className="profile-friends">
-              <CardsHeader text="Друзья" />
-              <div>
-                {currentProfileFriends.length > 0 ? (
-                  currentProfileFriends?.slice(0, 12).map((item: IProfileFriends, index) => {
-                    return (
-                      <NavLink key={item.id} to="/">
-                        <img src={item.image.x64} alt="avatar-friends" />
-                      </NavLink>
-                    )
-                  })
-                ) : (
-                  <span>Нет друзей</span>
-                )}
+                <div className="manga-pie">
+                  <Bar
+                    data={{
+                      labels: ['Запланировано', 'Смотрю', 'Просмотрено', 'Отложено', 'Брошено'],
+                      datasets: [
+                        {
+                          label: '',
+                          data: currentProfile.stats.statuses.manga.map((item) => item.size),
+                          backgroundColor: pieBGColors,
+                          borderColor: pieBRColors,
+                          borderWidth: 1,
+                        },
+                      ],
+                    }}
+                    width={400}
+                    height={200}
+                  />
+                </div>
               </div>
             </div>
-            <div className="profile-favourites">
-              <CardsHeader text="Избранное" />
-              {Object.values(currentProfileFavourites).length > 0 && createFavouritesData().map((item) => item)}
+            <div className="profile_social">
+              <div className="profile-clubs">
+                <CardsHeader text="Клубы" />
+                <div>
+                  {currentProfileClubs.length > 0 ? (
+                    currentProfileClubs?.slice(0, 6).map((item: IProfileClubs, index) => {
+                      return (
+                        <NavLink key={item.id} to={`/clubs/${item.id}`}>
+                          <img src={`https://dere.shikimori.one${item.logo.x73}`} alt="avatar-clubs" />
+                        </NavLink>
+                      )
+                    })
+                  ) : (
+                    <span>Не состоит ни в одном из клубов</span>
+                  )}
+                </div>
+              </div>
+              <div className="profile-friends">
+                <CardsHeader text="Друзья" />
+                <div>
+                  {currentProfileFriends.length > 0 ? (
+                    currentProfileFriends?.slice(0, 12).map((item: IProfileFriends, index) => {
+                      return (
+                        <NavLink key={item.id} to={`/profile/${item.id}`}>
+                          <img src={item.image.x64} alt="avatar-friends" />
+                        </NavLink>
+                      )
+                    })
+                  ) : (
+                    <span>Нет друзей</span>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       )}
+      <div className="second_section">
+        {currentProfile?.stats?.activity.length && (
+          <div className="activity-bar" style={{ width: '400px', height: '400px' }}>
+            <Bar
+              data={{
+                labels: currentProfile.stats.activity.map((item) => moment(+item.name[1] * 1000).format('MMM YYYY')),
+                datasets: [
+                  {
+                    label: 'Активность на сайте',
+                    data: currentProfile.stats.activity.map((item) => item.value),
+                    backgroundColor: ['rgba(84,231,255,0.8)'],
+                    borderColor: ['rgba(84,231,255,1)'],
+                  },
+                ],
+              }}
+            />
+          </div>
+        )}
+        <div className="profile-favourites">
+          <CardsHeader text="Избранное" />
+          <div>{Object.values(currentProfileFavourites).length > 0 && createFavouritesData().map((item) => item)}</div>
+        </div>
+      </div>
     </div>
   )
 }

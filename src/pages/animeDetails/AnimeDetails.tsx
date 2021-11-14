@@ -41,7 +41,7 @@ const AnimeDetails = () => {
     )
   }
 
-  if (loading.getCurrentAnime || loading.getComments) return <Loader />
+  if (loading.getCurrentAnime) return <Loader />
 
   return (
     <div className="container cur-anime">

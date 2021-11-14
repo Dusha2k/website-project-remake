@@ -32,7 +32,7 @@ const ClubDetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  //Получение кастомных стилей
+  //Получение кастомных стилей и комментов
   useEffect(() => {
     if (Object.values(currentClub).length > 0 && !loading.getCurrentClub) {
       getRequest(`styles/${currentClub.style_id}`).then((res: any) => setStyle(res.data))
@@ -50,7 +50,7 @@ const ClubDetailsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [style])
 
-  if (loading.getCurrentClub || loading.getCommentsClub) return <Loader />
+  if (loading.getCurrentClub) return <Loader />
 
   return (
     <>
